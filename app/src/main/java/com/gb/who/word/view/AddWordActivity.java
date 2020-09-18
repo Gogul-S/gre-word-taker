@@ -50,8 +50,9 @@ public class AddWordActivity extends AppCompatActivity {
         addWordBinding.btnAddPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String personName = addWordBinding.etPersonName.getText().toString();
-                addWordViewModel.insertPerson(new Word(personName));
+                String word = addWordBinding.etWord.getText().toString();
+                String meaning = addWordBinding.etMeaning.getText().toString();
+                addWordViewModel.addWord(new Word(word,meaning));
             }
         });
     }

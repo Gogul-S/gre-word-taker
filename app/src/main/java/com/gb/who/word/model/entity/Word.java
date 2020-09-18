@@ -13,8 +13,12 @@ public class Word {
     private int id;
 
     @NonNull
-    @ColumnInfo(name = "name")
-    private String name;
+    @ColumnInfo(name = "wordTitle")
+    private String wordTitle;
+
+    @NonNull
+    @ColumnInfo(name = "meaning")
+    private String meaning;
 
     public int getId() {
         return id;
@@ -25,15 +29,25 @@ public class Word {
     }
 
     @NonNull
-    public String getName() {
-        return name;
+    public String getWordTitle() {
+        return wordTitle;
     }
 
-    public void setName(@NonNull String name) {
-        this.name = name;
+    public void setWordTitle(@NonNull String name) {
+        this.wordTitle = name;
     }
 
-    public Word(@NonNull String name) {
-        this.name = name;
+    @NonNull
+    public String getMeaning() {
+        return meaning;
+    }
+
+    public void setMeaning(@NonNull String meaning) {
+        this.meaning = meaning;
+    }
+
+    public Word(@NonNull String wordTitle,@NonNull String meaning) {
+        this.wordTitle = wordTitle;
+        this.meaning = meaning;
     }
 }

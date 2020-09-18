@@ -29,7 +29,7 @@ public class WordListActivity extends AppCompatActivity {
         initViewModel();
         observeViewModel();
         initListeners();
-        wordListViewModel.getPersons();
+        wordListViewModel.getWords();
     }
 
     private void initListeners() {
@@ -48,7 +48,7 @@ public class WordListActivity extends AppCompatActivity {
                 if (people != null && !people.isEmpty()) {
                     StringBuilder personNames = new StringBuilder();
                     for (Word word : people) {
-                        personNames.append("\n\n").append(word.getName());
+                        personNames.append("\n\n").append(word.getWordTitle()).append(":").append(word.getMeaning());
                     }
                     listWordsBinding.tvWords.setText(personNames);
                 }

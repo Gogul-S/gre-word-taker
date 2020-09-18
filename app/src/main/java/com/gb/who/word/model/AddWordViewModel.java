@@ -26,7 +26,7 @@ public class AddWordViewModel extends AndroidViewModel {
         wordRepository = new WordRepository(application);
     }
 
-    public void insertPerson(Word word) {
+    public void addWord(Word word) {
         wordRepository.insertPerson(word).
                 subscribeOn(Schedulers.io()).
                 observeOn(AndroidSchedulers.mainThread())

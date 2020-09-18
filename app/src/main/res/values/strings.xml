@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Who</string>
+    <string name="word">Word</string>
+    <string name="write_meaning_of_word_in_your_own_words">Write meaning of word in your own words</string>
 </resources>

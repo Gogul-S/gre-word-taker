@@ -31,7 +31,7 @@ public class WordListViewModel extends AndroidViewModel {
         return personsListLiveData;
     }
 
-    public void getPersons() {
+    public void getWords() {
         wordRepository.getAllPersons()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
