@@ -1,4 +1,4 @@
-package com.gb.who.person.model;
+package com.gb.who.word.model;
 
 import android.app.Application;
 
@@ -7,43 +7,42 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.gb.who.person.model.entity.Person;
-import com.gb.who.person.service.PersonRepository;
+import com.gb.who.word.model.entity.Word;
+import com.gb.who.word.service.WordRepository;
 
 import java.util.List;
 
-import io.reactivex.MaybeObserver;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class PersonListViewModel extends AndroidViewModel {
+public class WordListViewModel extends AndroidViewModel {
 
-    private PersonRepository personRepository;
-    private MutableLiveData<List<Person>> personsListLiveData = new MutableLiveData<>();
+    private WordRepository wordRepository;
+    private MutableLiveData<List<Word>> personsListLiveData = new MutableLiveData<>();
 
-    public PersonListViewModel(@NonNull Application application) {
+    public WordListViewModel(@NonNull Application application) {
         super(application);
-        personRepository = new PersonRepository(application);
+        wordRepository = new WordRepository(application);
     }
 
-    public LiveData<List<Person>> getAllPersons() {
+    public LiveData<List<Word>> getAllPersons() {
         return personsListLiveData;
     }
 
     public void getPersons() {
-        personRepository.getAllPersons()
+        wordRepository.getAllPersons()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Person>>() {
+                .subscribe(new Observer<List<Word>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(List<Person> people) {
+                    public void onNext(List<Word> people) {
                         personsListLiveData.setValue(people);
                     }
 

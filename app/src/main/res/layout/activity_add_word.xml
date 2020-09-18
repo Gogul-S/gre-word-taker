@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".person.view.AddPersonalityActivity">
+        tools:context=".word.view.AddWordActivity">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
@@ -21,7 +21,9 @@
                 android:id="@+id/etPersonName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Person Name" />
+                android:hint="Word"
+                android:singleLine="true"
+                android:imeOptions="actionDone"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

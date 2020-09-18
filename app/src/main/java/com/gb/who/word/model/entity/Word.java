@@ -1,12 +1,12 @@
-package com.gb.who.person.model.entity;
+package com.gb.who.word.model.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "person")
-public class Person {
+@Entity(tableName = "word")
+public class Word {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -33,7 +33,7 @@ public class Person {
         this.name = name;
     }
 
-    public Person(@NonNull String name) {
+    public Word(@NonNull String name) {
         this.name = name;
     }
 }
