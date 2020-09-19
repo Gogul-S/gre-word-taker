@@ -11,9 +11,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.gb.who.R;
+import com.gb.who.common.RecyclerViewClickHandler;
+import com.gb.who.common.RecyclerViewEntity;
 import com.gb.who.databinding.ActivityListWordsBinding;
+import com.gb.who.word.adapter.WordListAdapter;
 import com.gb.who.word.model.WordListViewModel;
 import com.gb.who.word.model.entity.Word;
+import com.gb.who.word.model.entity.WordAdapterEntity;
 
 import java.util.List;
 
@@ -21,6 +25,7 @@ public class WordListActivity extends AppCompatActivity {
 
     private ActivityListWordsBinding listWordsBinding;
     private WordListViewModel wordListViewModel;
+    private WordListAdapter wordListAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,18 +47,34 @@ public class WordListActivity extends AppCompatActivity {
     }
 
     private void observeViewModel() {
-        wordListViewModel.getAllPersons().observe(this, new Observer<List<Word>>() {
-            @Override
-            public void onChanged(List<Word> people) {
-                if (people != null && !people.isEmpty()) {
-                    StringBuilder personNames = new StringBuilder();
-                    for (Word word : people) {
-                        personNames.append("\n\n").append(word.getWordTitle()).append(":").append(word.getMeaning());
-                    }
-                    listWordsBinding.tvWords.setText(personNames);
-                }
+        wordListViewModel.getAllWords().observe(this, words -> {
+            if (words != null && !words.isEmpty()) {
+                populateWords(words);
             }
         });
+    }
+
+    private void populateWords(List<WordAdapterEntity> adapterEntities) {
+        if(wordListAdapter == null) {
+            initAdapter(adapterEntities);
+        } else {
+            wordListAdapter.setAdapterEntities(adapterEntities);
+        }
+    }
+
+    private void initAdapter(List<WordAdapterEntity> adapterEntities) {
+        wordListAdapter = new WordListAdapter(adapterEntities, new RecyclerViewClickHandler() {
+            @Override
+            public void onItemClicked(RecyclerViewEntity recyclerViewEntity) {
+
+            }
+
+            @Override
+            public void onItemLongClicked(RecyclerViewEntity recyclerViewEntity) {
+
+            }
+        });
+        listWordsBinding.rvWords.setAdapter(wordListAdapter);
     }
 
     private void initViewModel() {
