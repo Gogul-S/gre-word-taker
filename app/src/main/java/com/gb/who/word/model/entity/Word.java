@@ -17,6 +17,10 @@ public class Word {
     private String wordTitle;
 
     @NonNull
+    @ColumnInfo(name = "hint")
+    private String hint;
+
+    @NonNull
     @ColumnInfo(name = "meaning")
     private String meaning;
 
@@ -46,8 +50,18 @@ public class Word {
         this.meaning = meaning;
     }
 
-    public Word(@NonNull String wordTitle,@NonNull String meaning) {
+    @NonNull
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(@NonNull String hint) {
+        this.hint = hint;
+    }
+
+    public Word(@NonNull String wordTitle, @NonNull String meaning, @NonNull String hint) {
         this.wordTitle = wordTitle;
         this.meaning = meaning;
+        this.hint = hint;
     }
 }

@@ -15,6 +15,7 @@ public class WordTransformer implements Transformer<Word, WordAdapterEntity> {
         return WordAdapterEntity.builder()
                 .id(input.getId())
                 .wordTitle(input.getWordTitle())
+                .hint(input.getHint())
                 .meaning(input.getMeaning())
                 .build();
     }

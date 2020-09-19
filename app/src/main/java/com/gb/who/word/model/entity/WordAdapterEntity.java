@@ -12,5 +12,6 @@ import lombok.EqualsAndHashCode;
 public class WordAdapterEntity extends RecyclerViewEntity {
     private int id;
     private String wordTitle;
+    private String hint;
     private String meaning;
 }

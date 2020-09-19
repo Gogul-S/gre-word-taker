@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="wordEntity"
             type="com.gb.who.word.model.entity.WordAdapterEntity" />
@@ -11,19 +12,41 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
-
+        android:layout_marginBottom="8dp"
+        android:background="@color/white"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/tvWordTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
             android:gravity="center_vertical"
-            android:textSize="18sp"
-            android:padding="10dp"
             android:text="@{wordEntity.wordTitle}"
+            android:textAllCaps="true"
             android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivWordImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvHint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{wordEntity.hint}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvWordTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvWordTitle" />
+
+
+        <ImageView
+            android:id="@+id/ivWordImage"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

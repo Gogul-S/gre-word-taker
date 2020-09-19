@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.gb.who.R;
+import com.gb.who.common.TextUtils;
 import com.gb.who.databinding.ActivityAddWordBinding;
 import com.gb.who.word.model.AddWordViewModel;
 import com.gb.who.word.model.entity.Word;
@@ -47,13 +48,23 @@ public class AddWordActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
-        addWordBinding.btnAddPerson.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String word = addWordBinding.etWord.getText().toString();
-                String meaning = addWordBinding.etMeaning.getText().toString();
-                addWordViewModel.addWord(new Word(word,meaning));
+        addWordBinding.btnAddPerson.setOnClickListener(view -> {
+            String word = addWordBinding.etWord.getText().toString();
+            if(!TextUtils.checkForNullAndEmpty(word)) {
+                addWordBinding.etWord.setError("Enter a word");
+                return;
             }
+            String hint = addWordBinding.etHint.getText().toString();
+            if(!TextUtils.checkForNullAndEmpty(hint)) {
+                addWordBinding.etHint.setError("Enter hint");
+                return;
+            }
+            String meaning = addWordBinding.etMeaning.getText().toString();
+            if(!TextUtils.checkForNullAndEmpty(meaning)) {
+                addWordBinding.etMeaning.setError("Enter Meaning for word");
+                return;
+            }
+            addWordViewModel.addWord(new Word(word,meaning,hint));
         });
     }
 }
