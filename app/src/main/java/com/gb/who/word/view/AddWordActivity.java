@@ -49,22 +49,40 @@ public class AddWordActivity extends AppCompatActivity {
 
     private void initListeners() {
         addWordBinding.btnAddPerson.setOnClickListener(view -> {
-            String word = addWordBinding.etWord.getText().toString();
-            if(!TextUtils.checkForNullAndEmpty(word)) {
-                addWordBinding.etWord.setError("Enter a word");
-                return;
-            }
-            String hint = addWordBinding.etHint.getText().toString();
-            if(!TextUtils.checkForNullAndEmpty(hint)) {
-                addWordBinding.etHint.setError("Enter hint");
-                return;
-            }
-            String meaning = addWordBinding.etMeaning.getText().toString();
-            if(!TextUtils.checkForNullAndEmpty(meaning)) {
-                addWordBinding.etMeaning.setError("Enter Meaning for word");
-                return;
-            }
-            addWordViewModel.addWord(new Word(word,meaning,hint));
+            addWord();
         });
+
+        addWordBinding.addWordsToolbar.setNavigationOnClickListener(view -> {
+            finish();
+        });
+    }
+
+    private void addWord() {
+        Word word = getWord();
+        if (word == null) return;
+        addWordViewModel.addWord(word);
+    }
+
+    private Word getWord() {
+        String wordTitle = addWordBinding.etWord.getText().toString();
+        if(!TextUtils.checkForNullAndEmpty(wordTitle)) {
+            addWordBinding.tilWord.setError(getString(R.string.enter_a_word));
+            return null;
+        }
+        addWordBinding.tilWord.setError(null);
+        String hint = addWordBinding.etHint.getText().toString();
+        if(!TextUtils.checkForNullAndEmpty(hint)) {
+            addWordBinding.tilHint.setError(getString(R.string.enter_hint));
+            return null;
+        }
+        addWordBinding.tilHint.setError(null);
+        String meaning = addWordBinding.etMeaning.getText().toString();
+        if(!TextUtils.checkForNullAndEmpty(meaning)) {
+            addWordBinding.tilMeaning.setError(getString(R.string.enter_meaning_for_word));
+            return null;
+        }
+        addWordBinding.tilMeaning.setError(null);
+        Word word = new Word(wordTitle,meaning,hint);
+        return word;
     }
 }

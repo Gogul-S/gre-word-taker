@@ -1,87 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".word.view.AddWordActivity">
+        android:fillViewport="true">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilWord"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.9">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etWord"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/word"
-                android:imeOptions="actionNext"
-                android:singleLine="true" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilHint"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilWord"
-            app:layout_constraintWidth_percent="0.9">
+            android:background="@color/white"
+            tools:context=".word.view.AddWordActivity">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etHint"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/addWordsToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="top"
-                android:singleLine="true"
-                android:hint="@string/provide_a_hint_to_quickly_recap_the_word"
-                android:imeOptions="actionDone" />
+                android:background="@color/white"
+                android:elevation="4dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/icn_back"
+                app:title="New Word" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilWord"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addWordsToolbar"
+                app:layout_constraintWidth_percent="0.9">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilMeaning"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilHint"
-            app:layout_constraintWidth_percent="0.9">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etWord"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:hint="@string/word"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etMeaning"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:gravity="top"
-                android:hint="@string/write_meaning_of_word_in_your_own_words"
-                android:imeOptions="actionDone" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilHint"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilWord"
+                app:layout_constraintWidth_percent="0.9">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnAddPerson"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="32dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/icn_tick"
-            app:tint="@color/white" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:hint="@string/provide_a_hint_to_quickly_recap_the_word"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilMeaning"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilHint"
+                app:layout_constraintWidth_percent="0.9">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMeaning"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:gravity="top"
+                    android:hint="@string/write_meaning_of_the_word_in_your_own_words"
+                    android:imeOptions="actionDone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnAddPerson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/icn_tick"
+                app:tint="@color/white" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </layout>

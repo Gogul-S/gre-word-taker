@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Word Book</string>
     <string name="word">Word</string>
-    <string name="write_meaning_of_word_in_your_own_words">Write meaning of word in your own words</string>
+    <string name="write_meaning_of_the_word_in_your_own_words">Write meaning of the word in your own words</string>
     <string name="provide_a_hint_to_quickly_recap_the_word">Provide a hint to quickly recap the word</string>
+    <string name="enter_a_word">Enter a word</string>
+    <string name="enter_hint">Enter hint</string>
+    <string name="enter_meaning_for_word">Enter Meaning for word</string>
 </resources>
