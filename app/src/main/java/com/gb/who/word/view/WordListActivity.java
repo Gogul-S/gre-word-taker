@@ -2,12 +2,10 @@ package com.gb.who.word.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.gb.who.R;
@@ -16,7 +14,6 @@ import com.gb.who.common.RecyclerViewEntity;
 import com.gb.who.databinding.ActivityListWordsBinding;
 import com.gb.who.word.adapter.WordListAdapter;
 import com.gb.who.word.model.WordListViewModel;
-import com.gb.who.word.model.entity.Word;
 import com.gb.who.word.model.entity.WordAdapterEntity;
 
 import java.util.List;
@@ -38,12 +35,8 @@ public class WordListActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
-        listWordsBinding.btnAddPerson.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(WordListActivity.this, AddWordActivity.class));
-            }
-        });
+        listWordsBinding.btnAddPerson.setOnClickListener(view -> startActivity(new Intent(WordListActivity.this, AddWordActivity.class)));
+        listWordsBinding.flSearchWords.setOnClickListener(v-> startActivity(new Intent(WordListActivity.this, SearchActivity.class)));
     }
 
     private void observeViewModel() {
