@@ -20,11 +20,15 @@ public class WordRepository {
     }
 
     public Single<Long> insertPerson(Word word) {
-       return wordDao.insertWord(word);
+        return wordDao.insertWord(word);
     }
 
     public Observable<List<Word>> getAllPersons() {
         return wordDao.getAllWords();
+    }
+
+    public Observable<List<Word>> getWordsByName(String searchText) {
+        return wordDao.getWordsByName(searchText);
     }
 
 

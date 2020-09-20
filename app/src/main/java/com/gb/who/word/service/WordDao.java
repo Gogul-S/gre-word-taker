@@ -21,5 +21,8 @@ public interface WordDao {
     @Query("SELECT * FROM Word")
     Observable<List<Word>> getAllWords();
 
+    @Query("select * from word where wordTitle like :searchText")
+    Observable<List<Word>> getWordsByName(String searchText);
+
 
 }
