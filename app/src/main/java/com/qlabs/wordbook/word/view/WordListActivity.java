@@ -1,20 +1,21 @@
-package com.qlabs.qlabs.word.view;
+package com.qlabs.wordbook.word.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.qlabs.qlabs.R;
-import com.qlabs.qlabs.common.RecyclerViewClickHandler;
-import com.qlabs.qlabs.common.RecyclerViewEntity;
-import com.qlabs.qlabs.databinding.ActivityListWordsBinding;
-import com.qlabs.qlabs.word.adapter.WordListAdapter;
-import com.qlabs.qlabs.word.model.WordListViewModel;
-import com.qlabs.qlabs.word.model.entity.WordAdapterEntity;
+import com.qlabs.wordbook.R;
+import com.qlabs.wordbook.common.RecyclerViewClickHandler;
+import com.qlabs.wordbook.common.RecyclerViewEntity;
+import com.qlabs.wordbook.databinding.ActivityListWordsBinding;
+import com.qlabs.wordbook.word.adapter.WordListAdapter;
+import com.qlabs.wordbook.word.model.WordListViewModel;
+import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class WordListActivity extends AppCompatActivity {
 
     private void initListeners() {
         listWordsBinding.btnAddPerson.setOnClickListener(view -> startActivity(new Intent(WordListActivity.this, AddWordActivity.class)));
-        listWordsBinding.flSearchWords.setOnClickListener(v-> startActivity(new Intent(WordListActivity.this, SearchActivity.class)));
+        listWordsBinding.flSearchWords.setOnClickListener(v -> startActivity(new Intent(WordListActivity.this, SearchActivity.class)));
     }
 
     private void observeViewModel() {
@@ -48,7 +49,7 @@ public class WordListActivity extends AppCompatActivity {
     }
 
     private void populateWords(List<WordAdapterEntity> adapterEntities) {
-        if(wordListAdapter == null) {
+        if (wordListAdapter == null) {
             initAdapter(adapterEntities);
         } else {
             wordListAdapter.setAdapterEntities(adapterEntities);
@@ -56,18 +57,34 @@ public class WordListActivity extends AppCompatActivity {
     }
 
     private void initAdapter(List<WordAdapterEntity> adapterEntities) {
-        wordListAdapter = new WordListAdapter(adapterEntities, new RecyclerViewClickHandler() {
+        wordListAdapter = new WordListAdapter(adapterEntities, new RecyclerViewClickHandler<WordAdapterEntity>() {
             @Override
-            public void onItemClicked(RecyclerViewEntity recyclerViewEntity) {
-
+            public void onItemClicked(View view, WordAdapterEntity wordAdapterEntity) {
+                handleWordClick(view, wordAdapterEntity);
             }
 
             @Override
-            public void onItemLongClicked(RecyclerViewEntity recyclerViewEntity) {
+            public void onItemLongClicked(View view, WordAdapterEntity wordAdapterEntity) {
 
             }
         });
         listWordsBinding.rvWords.setAdapter(wordListAdapter);
+    }
+
+    private void handleWordClick(View view, WordAdapterEntity wordAdapterEntity) {
+        switch (view.getId()) {
+            case R.id.clWordContainer:
+                openWordDetailsActivity(wordAdapterEntity);
+                break;
+        }
+    }
+
+    private void openWordDetailsActivity(WordAdapterEntity wordAdapterEntity) {
+        Bundle args = new Bundle();
+        args.putInt("wordId", wordAdapterEntity.getId());
+        Intent intent = new Intent(this, WordDetailsActivity.class);
+        intent.putExtras(args);
+        startActivity(intent);
     }
 
     private void initViewModel() {

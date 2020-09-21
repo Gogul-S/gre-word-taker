@@ -1,4 +1,4 @@
-package com.qlabs.qlabs.word.model;
+package com.qlabs.wordbook.word.model;
 
 import android.app.Application;
 
@@ -7,9 +7,9 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.qlabs.qlabs.word.model.entity.WordAdapterEntity;
-import com.qlabs.qlabs.word.service.WordRepository;
-import com.qlabs.qlabs.word.transformer.WordTransformer;
+import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
+import com.qlabs.wordbook.word.service.WordRepository;
+import com.qlabs.wordbook.word.transformer.WordTransformer;
 
 import java.util.List;
 

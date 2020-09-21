@@ -1,4 +1,4 @@
-package com.qlabs.qlabs;
+package com.qlabs.wordbook;
 
 import android.content.Context;
 

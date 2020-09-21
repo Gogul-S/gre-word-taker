@@ -1,4 +1,4 @@
-package com.qlabs.qlabs.common;
+package com.qlabs.wordbook.common;
 
 public class RecyclerViewEntity {
     private int viewPosition;

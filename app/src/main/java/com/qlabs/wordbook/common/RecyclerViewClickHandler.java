@@ -1,6 +1,8 @@
-package com.qlabs.qlabs.common;
+package com.qlabs.wordbook.common;
 
-public interface RecyclerViewClickHandler {
-    void onItemClicked(RecyclerViewEntity recyclerViewEntity);
-    void onItemLongClicked(RecyclerViewEntity recyclerViewEntity);
+import android.view.View;
+
+public interface RecyclerViewClickHandler<T extends RecyclerViewEntity> {
+    void onItemClicked(View view, T recyclerViewEntity);
+    void onItemLongClicked(View view, T recyclerViewEntity);
 }

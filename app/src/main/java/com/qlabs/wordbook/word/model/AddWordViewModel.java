@@ -1,4 +1,4 @@
-package com.qlabs.qlabs.word.model;
+package com.qlabs.wordbook.word.model;
 
 import android.app.Application;
 
@@ -7,8 +7,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.qlabs.qlabs.word.model.entity.Word;
-import com.qlabs.qlabs.word.service.WordRepository;
+import com.qlabs.wordbook.word.model.entity.Word;
+import com.qlabs.wordbook.word.service.WordRepository;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;

@@ -6,14 +6,16 @@
 
         <variable
             name="wordEntity"
-            type="com.gb.who.word.model.entity.WordAdapterEntity" />
+            type="com.qlabs.wordbook.word.model.entity.WordAdapterEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clWordContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@color/white"
+        android:background="@drawable/background_white_clickable"
+        android:onClick="@{(v) -> wordEntity.recyclerViewClickHandler.onItemClicked(v,wordEntity)}"
         android:padding="16dp">
 
         <TextView
@@ -45,12 +47,12 @@
         <ImageView
             android:id="@+id/ivWordImage"
             android:layout_width="56dp"
-            android:padding="16dp"
             android:layout_height="56dp"
-            app:srcCompat="@drawable/app_icon"
+            android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/app_icon" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

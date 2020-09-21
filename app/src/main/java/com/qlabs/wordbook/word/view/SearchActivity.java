@@ -1,22 +1,24 @@
-package com.qlabs.qlabs.word.view;
+package com.qlabs.wordbook.word.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.qlabs.qlabs.R;
-import com.qlabs.qlabs.common.RecyclerViewClickHandler;
-import com.qlabs.qlabs.common.RecyclerViewEntity;
-import com.qlabs.qlabs.common.TextUtils;
-import com.qlabs.qlabs.databinding.ActivitySearchBinding;
-import com.qlabs.qlabs.word.adapter.WordListAdapter;
-import com.qlabs.qlabs.word.model.SearchViewModel;
-import com.qlabs.qlabs.word.model.entity.WordAdapterEntity;
+import com.qlabs.wordbook.R;
+import com.qlabs.wordbook.common.RecyclerViewClickHandler;
+import com.qlabs.wordbook.common.RecyclerViewEntity;
+import com.qlabs.wordbook.common.TextUtils;
+import com.qlabs.wordbook.databinding.ActivitySearchBinding;
+import com.qlabs.wordbook.word.adapter.WordListAdapter;
+import com.qlabs.wordbook.word.model.SearchViewModel;
+import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
 
 import java.util.Collections;
 import java.util.List;
@@ -50,18 +52,34 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void initAdapter(List<WordAdapterEntity> adapterEntities) {
-        wordListAdapter = new WordListAdapter(adapterEntities, new RecyclerViewClickHandler() {
+        wordListAdapter = new WordListAdapter(adapterEntities, new RecyclerViewClickHandler<WordAdapterEntity>() {
             @Override
-            public void onItemClicked(RecyclerViewEntity recyclerViewEntity) {
-
+            public void onItemClicked(View view, WordAdapterEntity wordAdapterEntity) {
+                handleWordClick(view, wordAdapterEntity);
             }
 
             @Override
-            public void onItemLongClicked(RecyclerViewEntity recyclerViewEntity) {
+            public void onItemLongClicked(View view, WordAdapterEntity wordAdapterEntity) {
 
             }
         });
         searchBinding.rvWords.setAdapter(wordListAdapter);
+    }
+
+    private void handleWordClick(View view, WordAdapterEntity wordAdapterEntity) {
+        switch (view.getId()) {
+            case R.id.clWordContainer:
+                openWordDetailsActivity(wordAdapterEntity);
+                break;
+        }
+    }
+
+    private void openWordDetailsActivity(WordAdapterEntity wordAdapterEntity) {
+        Bundle args = new Bundle();
+        args.putInt("wordId", wordAdapterEntity.getId());
+        Intent intent = new Intent(this, WordDetailsActivity.class);
+        intent.putExtras(args);
+        startActivity(intent);
     }
 
     private void initViewModel() {

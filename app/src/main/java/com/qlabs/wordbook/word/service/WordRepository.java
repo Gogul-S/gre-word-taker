@@ -1,9 +1,9 @@
-package com.qlabs.qlabs.word.service;
+package com.qlabs.wordbook.word.service;
 
 import android.app.Application;
 
-import com.qlabs.qlabs.database.WordDataBase;
-import com.qlabs.qlabs.word.model.entity.Word;
+import com.qlabs.wordbook.database.WordDataBase;
+import com.qlabs.wordbook.word.model.entity.Word;
 
 import java.util.List;
 

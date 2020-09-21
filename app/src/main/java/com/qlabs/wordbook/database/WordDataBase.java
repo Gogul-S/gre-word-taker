@@ -1,4 +1,4 @@
-package com.qlabs.qlabs.database;
+package com.qlabs.wordbook.database;
 
 import android.content.Context;
 
@@ -6,8 +6,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.qlabs.qlabs.word.model.entity.Word;
-import com.qlabs.qlabs.word.service.WordDao;
+import com.qlabs.wordbook.word.model.entity.Word;
+import com.qlabs.wordbook.word.service.WordDao;
 
 @Database(entities = {Word.class}, version = 1, exportSchema = false)
 public abstract class WordDataBase extends RoomDatabase {

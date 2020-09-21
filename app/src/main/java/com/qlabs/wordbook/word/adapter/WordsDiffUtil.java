@@ -1,8 +1,8 @@
-package com.qlabs.qlabs.word.adapter;
+package com.qlabs.wordbook.word.adapter;
 
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.qlabs.qlabs.word.model.entity.WordAdapterEntity;
+import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
 
 import java.util.List;
 

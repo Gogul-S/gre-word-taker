@@ -1,4 +1,4 @@
-package com.qlabs.qlabs.word.view;
+package com.qlabs.wordbook.word.view;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -8,11 +8,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.qlabs.qlabs.R;
-import com.qlabs.qlabs.common.TextUtils;
-import com.qlabs.qlabs.databinding.ActivityAddWordBinding;
-import com.qlabs.qlabs.word.model.AddWordViewModel;
-import com.qlabs.qlabs.word.model.entity.Word;
+import com.qlabs.wordbook.R;
+import com.qlabs.wordbook.common.TextUtils;
+import com.qlabs.wordbook.databinding.ActivityAddWordBinding;
+import com.qlabs.wordbook.word.model.AddWordViewModel;
+import com.qlabs.wordbook.word.model.entity.Word;
 
 public class AddWordActivity extends AppCompatActivity {
 
@@ -26,6 +26,7 @@ public class AddWordActivity extends AppCompatActivity {
         initListeners();
         initViewModel();
         observeViewModel();
+        addWordBinding.etWord.requestFocus();
     }
 
     private void observeViewModel() {

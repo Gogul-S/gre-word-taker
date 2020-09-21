@@ -1,4 +1,4 @@
-package com.qlabs.qlabs.word.adapter;
+package com.qlabs.wordbook.word.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -8,10 +8,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.qlabs.qlabs.R;
-import com.qlabs.qlabs.common.RecyclerViewClickHandler;
-import com.qlabs.qlabs.databinding.AdapterWordBinding;
-import com.qlabs.qlabs.word.model.entity.WordAdapterEntity;
+import com.qlabs.wordbook.R;
+import com.qlabs.wordbook.common.RecyclerViewClickHandler;
+import com.qlabs.wordbook.databinding.AdapterWordBinding;
+import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
 
 import java.util.ArrayList;
 import java.util.List;

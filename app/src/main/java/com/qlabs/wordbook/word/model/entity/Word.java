@@ -1,4 +1,4 @@
-package com.qlabs.qlabs.word.model.entity;
+package com.qlabs.wordbook.word.model.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

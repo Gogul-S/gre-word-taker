@@ -1,11 +1,11 @@
-package com.qlabs.qlabs.word.service;
+package com.qlabs.wordbook.word.service;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.qlabs.qlabs.word.model.entity.Word;
+import com.qlabs.wordbook.word.model.entity.Word;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package com.qlabs.qlabs.word.transformer;
+package com.qlabs.wordbook.word.transformer;
 
-import com.qlabs.qlabs.common.Transformer;
-import com.qlabs.qlabs.word.model.entity.Word;
-import com.qlabs.qlabs.word.model.entity.WordAdapterEntity;
+import com.qlabs.wordbook.common.Transformer;
+import com.qlabs.wordbook.word.model.entity.Word;
+import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;
