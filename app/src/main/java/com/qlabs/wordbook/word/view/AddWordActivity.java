@@ -65,24 +65,24 @@ public class AddWordActivity extends AppCompatActivity {
 
     private Word getWord() {
         String wordTitle = addWordBinding.etWord.getText().toString();
-        if(!TextUtils.checkForNullAndEmpty(wordTitle)) {
+        if (!TextUtils.checkForNullAndEmpty(wordTitle)) {
             addWordBinding.tilWord.setError(getString(R.string.enter_a_word));
             return null;
         }
         addWordBinding.tilWord.setError(null);
         String hint = addWordBinding.etHint.getText().toString();
-        if(!TextUtils.checkForNullAndEmpty(hint)) {
+        if (!TextUtils.checkForNullAndEmpty(hint)) {
             addWordBinding.tilHint.setError(getString(R.string.enter_hint));
             return null;
         }
         addWordBinding.tilHint.setError(null);
         String meaning = addWordBinding.etMeaning.getText().toString();
-        if(!TextUtils.checkForNullAndEmpty(meaning)) {
+        if (!TextUtils.checkForNullAndEmpty(meaning)) {
             addWordBinding.tilMeaning.setError(getString(R.string.enter_meaning_for_word));
             return null;
         }
         addWordBinding.tilMeaning.setError(null);
-        Word word = new Word(wordTitle,meaning,hint);
+        Word word = new Word(wordTitle.trim(), meaning.trim(), hint.trim());
         return word;
     }
 }

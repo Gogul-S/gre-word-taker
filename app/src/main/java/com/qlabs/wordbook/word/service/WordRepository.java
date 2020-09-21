@@ -31,5 +31,9 @@ public class WordRepository {
         return wordDao.getWordsByName(searchText);
     }
 
+    public Single<Word> getWordById(int id) {
+        return wordDao.getWordById(id);
+    }
+
 
 }
