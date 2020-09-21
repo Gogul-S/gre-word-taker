@@ -4,8 +4,10 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
 import com.qlabs.wordbook.word.service.WordRepository;
@@ -23,6 +25,7 @@ public class SearchViewModel extends AndroidViewModel {
 
     private WordRepository wordRepository;
     public MutableLiveData<List<WordAdapterEntity>> searchWordsLiveData = new MutableLiveData<>();
+    private Disposable searchObserverDisposable;
 
     public SearchViewModel(@NonNull Application application) {
         super(application);
@@ -31,6 +34,7 @@ public class SearchViewModel extends AndroidViewModel {
 
     public void searchWords(String searchText) {
         final WordTransformer wordTransformer = new WordTransformer();
+        disposeObserver();
         wordRepository.getWordsByName(searchText + "%")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -38,12 +42,12 @@ public class SearchViewModel extends AndroidViewModel {
                 .subscribe(new Observer<List<WordAdapterEntity>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        searchObserverDisposable = d;
                     }
 
                     @Override
-                    public void onNext(List<WordAdapterEntity> adapterEntities) {
-                        searchWordsLiveData.setValue(adapterEntities);
+                    public void onNext(List<WordAdapterEntity> wordAdapterEntities) {
+                        searchWordsLiveData.setValue(wordAdapterEntities);
                     }
 
                     @Override
@@ -56,6 +60,18 @@ public class SearchViewModel extends AndroidViewModel {
 
                     }
                 });
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        disposeObserver();
+    }
+
+    public void disposeObserver() {
+        if(searchObserverDisposable != null && !searchObserverDisposable.isDisposed()) {
+            searchObserverDisposable.dispose();
+        }
     }
 
     public void deleteWordById(int id) {
@@ -79,7 +95,6 @@ public class SearchViewModel extends AndroidViewModel {
                     }
                 });
     }
-
 
     public LiveData<List<WordAdapterEntity>> getSearchWordsLiveData() {
         return searchWordsLiveData;

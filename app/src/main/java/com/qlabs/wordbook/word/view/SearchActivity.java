@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.qlabs.wordbook.R;
 import com.qlabs.wordbook.common.RecyclerViewClickHandler;
-import com.qlabs.wordbook.common.RecyclerViewEntity;
 import com.qlabs.wordbook.common.TextUtils;
 import com.qlabs.wordbook.databinding.ActivitySearchBinding;
 import com.qlabs.wordbook.word.WordConstants;
@@ -99,7 +98,8 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
-        searchViewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
+        searchViewModel = ViewModelProviders.of(SearchActivity.this).get(SearchViewModel.class);
+
     }
 
     private void initListeners() {

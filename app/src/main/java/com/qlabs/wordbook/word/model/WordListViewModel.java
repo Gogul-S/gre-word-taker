@@ -25,6 +25,8 @@ public class WordListViewModel extends AndroidViewModel {
     private WordRepository wordRepository;
     private MutableLiveData<List<WordAdapterEntity>> wordListLiveData = new MutableLiveData<>();
 
+    private Disposable searchObserverDisposable;
+
     public WordListViewModel(@NonNull Application application) {
         super(application);
         wordRepository = new WordRepository(application);
@@ -83,5 +85,17 @@ public class WordListViewModel extends AndroidViewModel {
 
             }
         });
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        disposeObserver();
+    }
+
+    public void disposeObserver() {
+        if(searchObserverDisposable != null && !searchObserverDisposable.isDisposed()) {
+            searchObserverDisposable.dispose();
+        }
     }
 }
