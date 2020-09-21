@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.qlabs.wordbook.word.model.entity.Word;
 
@@ -26,6 +27,12 @@ public interface WordDao {
 
     @Query("select * from word where id = :id")
     Single<Word> getWordById(int id);
+
+    @Query("delete from word where id = :id")
+    Single<Integer> deleteWordById(int id);
+
+    @Update
+    Single<Integer> updateWord(Word word);
 
 
 }

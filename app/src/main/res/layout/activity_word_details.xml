@@ -19,7 +19,6 @@
             app:contentInsetStart="0dp"
             app:contentInsetStartWithNavigation="0dp"
             app:navigationIcon="@drawable/icn_back"
-            app:title="Word"
             app:titleTextColor="@color/darkGrey" />
 
         <androidx.constraintlayout.widget.ConstraintLayout

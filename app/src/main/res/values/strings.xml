@@ -9,4 +9,6 @@
     <string name="search_for_words">Search for Words</string>
     <string name="quick_hint">Quick Hint</string>
     <string name="something_went_wrong">Something went wrong</string>
+    <string name="success">Success</string>
+    <string name="please_try_again">Please try again</string>
 </resources>

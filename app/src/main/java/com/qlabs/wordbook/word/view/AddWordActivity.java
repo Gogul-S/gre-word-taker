@@ -5,12 +5,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.qlabs.wordbook.R;
 import com.qlabs.wordbook.common.TextUtils;
 import com.qlabs.wordbook.databinding.ActivityAddWordBinding;
+import com.qlabs.wordbook.word.WordConstants;
 import com.qlabs.wordbook.word.model.AddWordViewModel;
 import com.qlabs.wordbook.word.model.entity.Word;
 
@@ -26,21 +26,53 @@ public class AddWordActivity extends AppCompatActivity {
         initListeners();
         initViewModel();
         observeViewModel();
+        populateDataBasedOnMode();
         addWordBinding.etWord.requestFocus();
     }
 
+    private void populateDataBasedOnMode() {
+        int mode = getIntent().getIntExtra("mode", 0);
+        addWordViewModel.setMode(mode);
+        if (mode == WordConstants.EDIT_MODE) {
+            populateDataForEdit();
+        }
+    }
+
+    private void populateDataForEdit() {
+        int wordId = getIntent().getIntExtra("wordId", -1);
+        if (wordId != -1) {
+            addWordViewModel.getWordById(wordId);
+        } else {
+            closeWithError();
+        }
+    }
+
+    private void closeWithError() {
+        Toast.makeText(AddWordActivity.this, R.string.something_went_wrong, Toast.LENGTH_LONG).show();
+        finish();
+    }
+
     private void observeViewModel() {
-        addWordViewModel.getInsertionResult().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean success) {
-                if (success != null && success) {
-                    Toast.makeText(AddWordActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    Toast.makeText(AddWordActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-                }
+        addWordViewModel.getInsertionResult().observe(this, success -> {
+            if (success != null && success) {
+                Toast.makeText(AddWordActivity.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(AddWordActivity.this, getString(R.string.please_try_again), Toast.LENGTH_SHORT).show();
             }
         });
+
+        addWordViewModel.getEditWordLiveData().observe(this, this::populateWord);
+    }
+
+    private void populateWord(Word word) {
+        if (word != null) {
+            addWordBinding.etWord.setText(word.getWordTitle());
+            addWordBinding.etHint.setText(word.getHint());
+            addWordBinding.etMeaning.setText(word.getMeaning());
+        } else {
+            closeWithError();
+        }
     }
 
     private void initViewModel() {
@@ -59,8 +91,12 @@ public class AddWordActivity extends AppCompatActivity {
 
     private void addWord() {
         Word word = getWord();
-        if (word == null) return;
-        addWordViewModel.addWord(word);
+        if (addWordViewModel.getMode() == WordConstants.EDIT_MODE) {
+            addWordViewModel.updateWord(word);
+        } else {
+            if (word == null) return;
+            addWordViewModel.addWord(word);
+        }
     }
 
     private Word getWord() {
@@ -82,7 +118,25 @@ public class AddWordActivity extends AppCompatActivity {
             return null;
         }
         addWordBinding.tilMeaning.setError(null);
-        Word word = new Word(wordTitle.trim(), meaning.trim(), hint.trim());
+        Word word;
+        if (addWordViewModel.getMode() == WordConstants.EDIT_MODE) {
+            word = getUpdatedWord(wordTitle, hint, meaning);
+        } else {
+            word = new Word(wordTitle.trim(), meaning.trim(), hint.trim());
+        }
+        return word;
+    }
+
+    private Word getUpdatedWord(String wordTitle, String hint, String meaning) {
+        Word word;
+        word = addWordViewModel.getEditWord();
+        if (word == null) {
+            closeWithError();
+        } else {
+            word.setWordTitle(wordTitle);
+            word.setHint(hint);
+            word.setMeaning(meaning);
+        }
         return word;
     }
 }

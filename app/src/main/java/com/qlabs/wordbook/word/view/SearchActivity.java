@@ -16,6 +16,7 @@ import com.qlabs.wordbook.common.RecyclerViewClickHandler;
 import com.qlabs.wordbook.common.RecyclerViewEntity;
 import com.qlabs.wordbook.common.TextUtils;
 import com.qlabs.wordbook.databinding.ActivitySearchBinding;
+import com.qlabs.wordbook.word.WordConstants;
 import com.qlabs.wordbook.word.adapter.WordListAdapter;
 import com.qlabs.wordbook.word.model.SearchViewModel;
 import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
@@ -71,7 +72,22 @@ public class SearchActivity extends AppCompatActivity {
             case R.id.clWordContainer:
                 openWordDetailsActivity(wordAdapterEntity);
                 break;
+            case R.id.ivDeleteWord:
+                searchViewModel.deleteWordById(wordAdapterEntity.getId());
+                break;
+            case R.id.ivEditWord:
+                openEditWordActivity(wordAdapterEntity);
+                break;
         }
+    }
+
+    private void openEditWordActivity(WordAdapterEntity wordAdapterEntity) {
+        Bundle args = new Bundle();
+        args.putInt("mode", WordConstants.EDIT_MODE);
+        args.putInt("wordId",wordAdapterEntity.getId());
+        Intent editWord = new Intent(this,AddWordActivity.class);
+        editWord.putExtras(args);
+        startActivity(editWord);
     }
 
     private void openWordDetailsActivity(WordAdapterEntity wordAdapterEntity) {

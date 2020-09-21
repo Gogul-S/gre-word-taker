@@ -14,6 +14,7 @@ import com.qlabs.wordbook.word.transformer.WordTransformer;
 import java.util.List;
 
 import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -52,6 +53,28 @@ public class SearchViewModel extends AndroidViewModel {
 
                     @Override
                     public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void deleteWordById(int id) {
+        wordRepository.deleteWordById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Integer integer) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
 
                     }
                 });

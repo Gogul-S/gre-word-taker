@@ -35,5 +35,13 @@ public class WordRepository {
         return wordDao.getWordById(id);
     }
 
+    public Single<Integer> deleteWordById(int id) {
+        return wordDao.deleteWordById(id);
+    }
+
+    public Single<Integer> updateWord(Word word) {
+        return wordDao.updateWord(word);
+    }
+
 
 }

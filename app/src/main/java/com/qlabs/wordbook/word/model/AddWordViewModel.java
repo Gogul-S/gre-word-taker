@@ -20,6 +20,10 @@ public class AddWordViewModel extends AndroidViewModel {
     private WordRepository wordRepository;
 
     private MutableLiveData<Boolean> insertionResult = new MutableLiveData<>();
+    private MutableLiveData<Word> editWordLiveData = new MutableLiveData<>();
+
+    private Word editWord;
+    private int mode;
 
     public AddWordViewModel(@NonNull Application application) {
         super(application);
@@ -49,7 +53,72 @@ public class AddWordViewModel extends AndroidViewModel {
 
     }
 
+    public void getWordById(int id) {
+        wordRepository.getWordById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Word>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Word word) {
+                        editWord = word;
+                        editWordLiveData.setValue(word);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        editWordLiveData.setValue(null);
+                    }
+                });
+    }
+
     public LiveData<Boolean> getInsertionResult() {
         return insertionResult;
+    }
+
+    public LiveData<Word> getEditWordLiveData() {
+        return editWordLiveData;
+    }
+
+    public void updateWord(Word word) {
+        wordRepository.updateWord(word)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Integer integer) {
+                        insertionResult.setValue(true);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        insertionResult.setValue(false);
+                    }
+                });
+    }
+
+    public Word getEditWord() {
+        return editWord;
+    }
+
+    public void setEditWord(Word editWord) {
+        this.editWord = editWord;
+    }
+
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
     }
 }

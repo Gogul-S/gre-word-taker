@@ -13,6 +13,7 @@ import com.qlabs.wordbook.R;
 import com.qlabs.wordbook.common.RecyclerViewClickHandler;
 import com.qlabs.wordbook.common.RecyclerViewEntity;
 import com.qlabs.wordbook.databinding.ActivityListWordsBinding;
+import com.qlabs.wordbook.word.WordConstants;
 import com.qlabs.wordbook.word.adapter.WordListAdapter;
 import com.qlabs.wordbook.word.model.WordListViewModel;
 import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
@@ -76,7 +77,22 @@ public class WordListActivity extends AppCompatActivity {
             case R.id.clWordContainer:
                 openWordDetailsActivity(wordAdapterEntity);
                 break;
+            case R.id.ivDeleteWord:
+                wordListViewModel.deleteWordById(wordAdapterEntity.getId());
+                break;
+            case R.id.ivEditWord:
+                openEditWordActivity(wordAdapterEntity);
+                break;
         }
+    }
+
+    private void openEditWordActivity(WordAdapterEntity wordAdapterEntity) {
+        Bundle args = new Bundle();
+        args.putInt("mode", WordConstants.EDIT_MODE);
+        args.putInt("wordId",wordAdapterEntity.getId());
+        Intent editWord = new Intent(this,AddWordActivity.class);
+        editWord.putExtras(args);
+        startActivity(editWord);
     }
 
     private void openWordDetailsActivity(WordAdapterEntity wordAdapterEntity) {

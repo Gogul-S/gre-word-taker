@@ -36,6 +36,6 @@ public class WordsDiffUtil extends DiffUtil.Callback {
         WordAdapterEntity oldItem = oldList.get(oldItemPosition);
         WordAdapterEntity newItem = newList.get(newItemPosition);
         return (oldItem.getWordTitle().equals(newItem.getWordTitle())
-                && newItem.getMeaning().equals(oldItem.getMeaning()));
+                && newItem.getHint().equals(oldItem.getHint()));
     }
 }
