@@ -1,5 +1,6 @@
 package com.qlabs.wordbook.word.service;
 
+import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -20,7 +21,7 @@ public interface WordDao {
     Single<Long> insertWord(Word word);
 
     @Query("SELECT * FROM Word")
-    Observable<List<Word>> getAllWords();
+    DataSource.Factory<Integer,Word> getAllWords();
 
     @Query("select * from word where wordTitle like :searchText")
     Observable<List<Word>> getWordsByName(String searchText);

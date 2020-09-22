@@ -18,6 +18,7 @@ import com.qlabs.wordbook.word.adapter.WordListAdapter;
 import com.qlabs.wordbook.word.model.WordListViewModel;
 import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class WordListActivity extends AppCompatActivity {
@@ -43,8 +44,10 @@ public class WordListActivity extends AppCompatActivity {
 
     private void observeViewModel() {
         wordListViewModel.getAllWords().observe(this, words -> {
-            if (words != null && !words.isEmpty()) {
+            if (words != null) {
                 populateWords(words);
+            } else {
+                populateWords(Collections.emptyList());
             }
         });
     }

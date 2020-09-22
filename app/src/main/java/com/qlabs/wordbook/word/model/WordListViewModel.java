@@ -6,13 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.paging.PagedList;
 
 import com.qlabs.wordbook.word.model.entity.Word;
 import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
 import com.qlabs.wordbook.word.service.WordRepository;
 import com.qlabs.wordbook.word.transformer.WordTransformer;
-
-import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
@@ -23,7 +22,7 @@ import io.reactivex.schedulers.Schedulers;
 public class WordListViewModel extends AndroidViewModel {
 
     private WordRepository wordRepository;
-    private MutableLiveData<List<WordAdapterEntity>> wordListLiveData = new MutableLiveData<>();
+    private MutableLiveData<PagedList<Word>> wordListLiveData = new MutableLiveData<>();
 
     private Disposable searchObserverDisposable;
 
@@ -32,24 +31,22 @@ public class WordListViewModel extends AndroidViewModel {
         wordRepository = new WordRepository(application);
     }
 
-    public LiveData<List<WordAdapterEntity>> getAllWords() {
+    public LiveData<PagedList<Word>> getAllWords() {
         return wordListLiveData;
     }
 
     public void getWords() {
-        final WordTransformer wordTransformer = new WordTransformer();
         wordRepository.getAllPersons()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(wordTransformer::transform)
-                .subscribe(new Observer<List<WordAdapterEntity>>() {
+                .subscribe(new Observer<PagedList<Word>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        searchObserverDisposable = d;
                     }
 
                     @Override
-                    public void onNext(List<WordAdapterEntity> words) {
+                    public void onNext(PagedList<Word> words) {
                         wordListLiveData.setValue(words);
                     }
 

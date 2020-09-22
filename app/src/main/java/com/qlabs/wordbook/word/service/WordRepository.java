@@ -2,6 +2,9 @@ package com.qlabs.wordbook.word.service;
 
 import android.app.Application;
 
+import androidx.paging.PagedList;
+import androidx.paging.RxPagedListBuilder;
+
 import com.qlabs.wordbook.database.WordDataBase;
 import com.qlabs.wordbook.word.model.entity.Word;
 
@@ -23,8 +26,8 @@ public class WordRepository {
         return wordDao.insertWord(word);
     }
 
-    public Observable<List<Word>> getAllPersons() {
-        return wordDao.getAllWords();
+    public Observable<PagedList<Word>> getAllPersons() {
+        return new RxPagedListBuilder<>(wordDao.getAllWords(), 10).buildObservable();
     }
 
     public Observable<List<Word>> getWordsByName(String searchText) {
