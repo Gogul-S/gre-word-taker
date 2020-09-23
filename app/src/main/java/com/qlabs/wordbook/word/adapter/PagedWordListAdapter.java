@@ -1,45 +1,40 @@
 package com.qlabs.wordbook.word.adapter;
 
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.qlabs.wordbook.R;
 import com.qlabs.wordbook.databinding.AdapterWordBinding;
 import com.qlabs.wordbook.word.model.entity.Word;
-import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
+import com.qlabs.wordbook.word.transformer.WordTransformer;
 
-public class PagedWordListAdapter extends PagedListAdapter<Word, PagedWordListAdapter.WordViewHolder> {
+public class PagedWordListAdapter extends PagedListAdapter<Word, WordListAdapter.WordViewHolder> {
 
-    protected PagedWordListAdapter(@NonNull DiffUtil.ItemCallback<Word> diffCallback) {
+    private WordTransformer wordTransformer = new WordTransformer();
+
+    public PagedWordListAdapter() {
         super(DIFF_CALLBACK);
     }
 
     @NonNull
     @Override
-    public WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public WordListAdapter.WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        AdapterWordBinding adapterWordBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.adapter_word, parent, false);
+        return new WordListAdapter.WordViewHolder(adapterWordBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull WordListAdapter.WordViewHolder holder, int position) {
+        Word word = getItem(position);
+        if (word != null) {
+            holder.bind(wordTransformer.transform(word));
+        } else {
 
-    }
-
-    public static class WordViewHolder extends RecyclerView.ViewHolder {
-
-        private AdapterWordBinding adapterWordBinding;
-
-        public WordViewHolder(@NonNull AdapterWordBinding wordBinding) {
-            super(wordBinding.getRoot());
-            this.adapterWordBinding = wordBinding;
-        }
-
-        public void bind(WordAdapterEntity wordAdapterEntity) {
-            adapterWordBinding.setWordEntity(wordAdapterEntity);
-            adapterWordBinding.executePendingBindings();
         }
     }
 

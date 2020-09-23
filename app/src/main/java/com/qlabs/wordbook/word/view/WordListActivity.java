@@ -8,14 +8,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 
 import com.qlabs.wordbook.R;
-import com.qlabs.wordbook.common.RecyclerViewClickHandler;
-import com.qlabs.wordbook.common.RecyclerViewEntity;
 import com.qlabs.wordbook.databinding.ActivityListWordsBinding;
 import com.qlabs.wordbook.word.WordConstants;
-import com.qlabs.wordbook.word.adapter.WordListAdapter;
+import com.qlabs.wordbook.word.adapter.PagedWordListAdapter;
 import com.qlabs.wordbook.word.model.WordListViewModel;
+import com.qlabs.wordbook.word.model.entity.Word;
 import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
 
 import java.util.Collections;
@@ -25,7 +25,7 @@ public class WordListActivity extends AppCompatActivity {
 
     private ActivityListWordsBinding listWordsBinding;
     private WordListViewModel wordListViewModel;
-    private WordListAdapter wordListAdapter;
+    private PagedWordListAdapter pagedWordListAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,33 +46,22 @@ public class WordListActivity extends AppCompatActivity {
         wordListViewModel.getAllWords().observe(this, words -> {
             if (words != null) {
                 populateWords(words);
-            } else {
-                populateWords(Collections.emptyList());
             }
         });
     }
 
-    private void populateWords(List<WordAdapterEntity> adapterEntities) {
-        if (wordListAdapter == null) {
+    private void populateWords(PagedList<Word> adapterEntities) {
+        if (pagedWordListAdapter == null) {
             initAdapter(adapterEntities);
         } else {
-            wordListAdapter.setAdapterEntities(adapterEntities);
+            pagedWordListAdapter.submitList(adapterEntities);
         }
     }
 
-    private void initAdapter(List<WordAdapterEntity> adapterEntities) {
-        wordListAdapter = new WordListAdapter(adapterEntities, new RecyclerViewClickHandler<WordAdapterEntity>() {
-            @Override
-            public void onItemClicked(View view, WordAdapterEntity wordAdapterEntity) {
-                handleWordClick(view, wordAdapterEntity);
-            }
-
-            @Override
-            public void onItemLongClicked(View view, WordAdapterEntity wordAdapterEntity) {
-
-            }
-        });
-        listWordsBinding.rvWords.setAdapter(wordListAdapter);
+    private void initAdapter(PagedList<Word> adapterEntities) {
+        pagedWordListAdapter = new PagedWordListAdapter();
+        listWordsBinding.rvWords.setAdapter(pagedWordListAdapter);
+        pagedWordListAdapter.submitList(adapterEntities);
     }
 
     private void handleWordClick(View view, WordAdapterEntity wordAdapterEntity) {

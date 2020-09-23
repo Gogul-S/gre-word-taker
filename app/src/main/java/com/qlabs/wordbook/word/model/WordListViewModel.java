@@ -9,9 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.paging.PagedList;
 
 import com.qlabs.wordbook.word.model.entity.Word;
-import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
 import com.qlabs.wordbook.word.service.WordRepository;
-import com.qlabs.wordbook.word.transformer.WordTransformer;
 
 import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
@@ -36,7 +34,7 @@ public class WordListViewModel extends AndroidViewModel {
     }
 
     public void getWords() {
-        wordRepository.getAllPersons()
+        wordRepository.getAllWords()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<PagedList<Word>>() {

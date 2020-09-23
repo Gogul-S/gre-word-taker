@@ -26,7 +26,7 @@ public class WordRepository {
         return wordDao.insertWord(word);
     }
 
-    public Observable<PagedList<Word>> getAllPersons() {
+    public Observable<PagedList<Word>> getAllWords() {
         return new RxPagedListBuilder<>(wordDao.getAllWords(), 10).buildObservable();
     }
 
