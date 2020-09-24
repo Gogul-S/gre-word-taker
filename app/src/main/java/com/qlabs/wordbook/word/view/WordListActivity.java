@@ -11,15 +11,14 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
 
 import com.qlabs.wordbook.R;
+import com.qlabs.wordbook.common.RecyclerViewClickHandler;
 import com.qlabs.wordbook.databinding.ActivityListWordsBinding;
 import com.qlabs.wordbook.word.WordConstants;
 import com.qlabs.wordbook.word.adapter.PagedWordListAdapter;
 import com.qlabs.wordbook.word.model.WordListViewModel;
 import com.qlabs.wordbook.word.model.entity.Word;
 import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
-
-import java.util.Collections;
-import java.util.List;
+import com.qlabs.wordbook.word.transformer.WordTransformer;
 
 public class WordListActivity extends AppCompatActivity {
 
@@ -59,7 +58,17 @@ public class WordListActivity extends AppCompatActivity {
     }
 
     private void initAdapter(PagedList<Word> adapterEntities) {
-        pagedWordListAdapter = new PagedWordListAdapter();
+        pagedWordListAdapter = new PagedWordListAdapter(new WordTransformer(), new RecyclerViewClickHandler<WordAdapterEntity>() {
+            @Override
+            public void onItemClicked(View view, WordAdapterEntity recyclerViewEntity) {
+                handleWordClick(view, recyclerViewEntity);
+            }
+
+            @Override
+            public void onItemLongClicked(View view, WordAdapterEntity recyclerViewEntity) {
+
+            }
+        });
         listWordsBinding.rvWords.setAdapter(pagedWordListAdapter);
         pagedWordListAdapter.submitList(adapterEntities);
     }
@@ -81,8 +90,8 @@ public class WordListActivity extends AppCompatActivity {
     private void openEditWordActivity(WordAdapterEntity wordAdapterEntity) {
         Bundle args = new Bundle();
         args.putInt("mode", WordConstants.EDIT_MODE);
-        args.putInt("wordId",wordAdapterEntity.getId());
-        Intent editWord = new Intent(this,AddWordActivity.class);
+        args.putInt("wordId", wordAdapterEntity.getId());
+        Intent editWord = new Intent(this, AddWordActivity.class);
         editWord.putExtras(args);
         startActivity(editWord);
     }

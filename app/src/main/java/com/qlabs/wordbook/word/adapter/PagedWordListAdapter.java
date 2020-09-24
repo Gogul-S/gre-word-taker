@@ -9,16 +9,22 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.qlabs.wordbook.R;
+import com.qlabs.wordbook.common.RecyclerViewClickHandler;
+import com.qlabs.wordbook.common.Transformer;
 import com.qlabs.wordbook.databinding.AdapterWordBinding;
 import com.qlabs.wordbook.word.model.entity.Word;
+import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
 import com.qlabs.wordbook.word.transformer.WordTransformer;
 
 public class PagedWordListAdapter extends PagedListAdapter<Word, WordListAdapter.WordViewHolder> {
 
-    private WordTransformer wordTransformer = new WordTransformer();
+    private WordTransformer wordTransformer;
+    private RecyclerViewClickHandler recyclerViewClickHandler;
 
-    public PagedWordListAdapter() {
+    public PagedWordListAdapter(WordTransformer transformer, RecyclerViewClickHandler recyclerViewClickHandler) {
         super(DIFF_CALLBACK);
+        this.wordTransformer = transformer;
+        this.recyclerViewClickHandler = recyclerViewClickHandler;
     }
 
     @NonNull
@@ -32,9 +38,9 @@ public class PagedWordListAdapter extends PagedListAdapter<Word, WordListAdapter
     public void onBindViewHolder(@NonNull WordListAdapter.WordViewHolder holder, int position) {
         Word word = getItem(position);
         if (word != null) {
-            holder.bind(wordTransformer.transform(word));
-        } else {
-
+            WordAdapterEntity adapterEntity = wordTransformer.transform(word);
+            adapterEntity.setRecyclerViewClickHandler(recyclerViewClickHandler);
+            holder.bind(adapterEntity);
         }
     }
 
