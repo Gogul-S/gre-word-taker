@@ -37,7 +37,7 @@ public class WordListActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
-        listWordsBinding.btnAddPerson.setOnClickListener(view -> startActivity(new Intent(WordListActivity.this, AddWordActivity.class)));
+        listWordsBinding.btnAddWord.setOnClickListener(view -> startActivity(new Intent(WordListActivity.this, AddWordActivity.class)));
         listWordsBinding.flSearchWords.setOnClickListener(v -> startActivity(new Intent(WordListActivity.this, SearchActivity.class)));
     }
 
