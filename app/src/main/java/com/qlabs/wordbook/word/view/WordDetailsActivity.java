@@ -1,16 +1,21 @@
 package com.qlabs.wordbook.word.view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.qlabs.wordbook.R;
 import com.qlabs.wordbook.databinding.ActivityWordDetailsBinding;
+import com.qlabs.wordbook.word.WordConstants;
 import com.qlabs.wordbook.word.model.WordDetailsViewModel;
 import com.qlabs.wordbook.word.model.entity.Word;
+import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
 
 public class WordDetailsActivity extends AppCompatActivity {
 
@@ -28,9 +33,10 @@ public class WordDetailsActivity extends AppCompatActivity {
     }
 
     private void getWordDetails() {
-        int wordId = getIntent().getIntExtra("wordId",-1);
-        if(wordId != -1) {
-            wordDetailsViewModel.getWordbyId(wordId);
+        int wordId = getIntent().getIntExtra("wordId", -1);
+        if (wordId != -1) {
+            wordDetailsViewModel.setWordId(wordId);
+            wordDetailsViewModel.getWordbyId();
         } else {
             Toast.makeText(WordDetailsActivity.this, R.string.something_went_wrong, Toast.LENGTH_LONG).show();
             finish();
@@ -61,5 +67,24 @@ public class WordDetailsActivity extends AppCompatActivity {
 
     private void initListeners() {
         wordDetailsBinding.toolbarWordDetails.setNavigationOnClickListener(v -> finish());
+        wordDetailsBinding.toolbarWordDetails.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.edit:
+                        openEditWordActivity();
+                }
+                return false;
+            }
+        });
+    }
+
+    private void openEditWordActivity() {
+        Bundle args = new Bundle();
+        args.putInt("mode", WordConstants.EDIT_MODE);
+        args.putInt("wordId", wordDetailsViewModel.getWordId());
+        Intent editWord = new Intent(this, AddWordActivity.class);
+        editWord.putExtras(args);
+        startActivity(editWord);
     }
 }

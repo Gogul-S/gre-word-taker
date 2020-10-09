@@ -10,6 +10,7 @@
         tools:context="com.qlabs.wordbook.word.view.WordDetailsActivity">
 
         <com.google.android.material.appbar.MaterialToolbar
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:id="@+id/toolbarWordDetails"
             android:layout_width="match_parent"
             android:layout_height="64dp"
@@ -17,8 +18,10 @@
             android:elevation="4dp"
             app:buttonGravity="center_vertical"
             app:contentInsetStart="0dp"
+
             app:contentInsetStartWithNavigation="0dp"
             app:navigationIcon="@drawable/icn_back"
+            app:menu="@menu/word_details_act_menu"
             app:titleTextColor="@color/darkGrey" />
 
         <androidx.constraintlayout.widget.ConstraintLayout

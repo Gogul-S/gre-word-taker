@@ -20,6 +20,8 @@ import com.qlabs.wordbook.word.model.entity.Word;
 import com.qlabs.wordbook.word.model.entity.WordAdapterEntity;
 import com.qlabs.wordbook.word.transformer.WordTransformer;
 
+import java.util.Collections;
+
 public class WordListActivity extends AppCompatActivity {
 
     private ActivityListWordsBinding listWordsBinding;
@@ -43,11 +45,13 @@ public class WordListActivity extends AppCompatActivity {
 
     private void observeViewModel() {
         wordListViewModel.getAllWords().observe(this, words -> {
-            if (words != null && !words.isEmpty()) {
-                listWordsBinding.tvNoWords.setVisibility(View.GONE);
+            if (words != null) {
                 populateWords(words);
-            } else {
+            }
+            if (words == null || words.isEmpty()) {
                 listWordsBinding.tvNoWords.setVisibility(View.VISIBLE);
+            } else {
+                listWordsBinding.tvNoWords.setVisibility(View.GONE);
             }
         });
     }

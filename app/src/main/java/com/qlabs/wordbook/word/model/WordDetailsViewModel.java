@@ -18,6 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 public class WordDetailsViewModel extends AndroidViewModel {
 
     private WordRepository wordRepository;
+    private int wordId;
     private MutableLiveData<Word> wordLiveData = new MutableLiveData<>();
 
     public WordDetailsViewModel(@NonNull Application application) {
@@ -29,8 +30,8 @@ public class WordDetailsViewModel extends AndroidViewModel {
         return wordLiveData;
     }
 
-    public void getWordbyId(int id) {
-        wordRepository.getWordById(id)
+    public void getWordbyId() {
+        wordRepository.getWordById(wordId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Word>() {
@@ -49,5 +50,13 @@ public class WordDetailsViewModel extends AndroidViewModel {
                         wordLiveData.setValue(null);
                     }
                 });
+    }
+
+    public int getWordId() {
+        return wordId;
+    }
+
+    public void setWordId(int wordId) {
+        this.wordId = wordId;
     }
 }
