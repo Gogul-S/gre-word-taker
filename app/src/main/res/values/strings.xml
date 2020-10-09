@@ -12,4 +12,6 @@
     <string name="success">Success</string>
     <string name="please_try_again">Please try again</string>
     <string name="edit">Edit</string>
+    <string name="word_notifications">Word Notification</string>
+    <string name="used_for_displaying_notifications_related_to_words">Used for displaying notification related to words</string>
 </resources>

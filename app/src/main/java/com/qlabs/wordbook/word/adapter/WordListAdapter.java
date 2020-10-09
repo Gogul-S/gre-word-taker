@@ -35,7 +35,9 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
     @Override
     public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
-        holder.bind(adapterEntities.get(position));
+        WordAdapterEntity wordAdapterEntity = adapterEntities.get(position);
+        wordAdapterEntity.setViewPosition(position);
+        holder.bind(wordAdapterEntity);
     }
 
     @Override

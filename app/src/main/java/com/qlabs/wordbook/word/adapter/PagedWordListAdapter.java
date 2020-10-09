@@ -40,6 +40,7 @@ public class PagedWordListAdapter extends PagedListAdapter<Word, WordListAdapter
         if (word != null) {
             WordAdapterEntity adapterEntity = wordTransformer.transform(word);
             adapterEntity.setRecyclerViewClickHandler(recyclerViewClickHandler);
+            adapterEntity.setViewPosition(position);
             holder.bind(adapterEntity);
         }
     }
