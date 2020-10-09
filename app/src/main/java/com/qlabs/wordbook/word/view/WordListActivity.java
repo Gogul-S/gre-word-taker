@@ -43,8 +43,11 @@ public class WordListActivity extends AppCompatActivity {
 
     private void observeViewModel() {
         wordListViewModel.getAllWords().observe(this, words -> {
-            if (words != null) {
+            if (words != null && !words.isEmpty()) {
+                listWordsBinding.tvNoWords.setVisibility(View.GONE);
                 populateWords(words);
+            } else {
+                listWordsBinding.tvNoWords.setVisibility(View.VISIBLE);
             }
         });
     }

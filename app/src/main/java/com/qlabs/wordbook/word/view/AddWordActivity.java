@@ -56,7 +56,6 @@ public class AddWordActivity extends AppCompatActivity {
     private void observeViewModel() {
         addWordViewModel.getInsertionResult().observe(this, success -> {
             if (success != null && success) {
-                Toast.makeText(AddWordActivity.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
                 finish();
             } else {
                 Toast.makeText(AddWordActivity.this, getString(R.string.please_try_again), Toast.LENGTH_SHORT).show();
