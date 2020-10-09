@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "260144017633",
+    "firebase_url": "https://wordbook-1b7a3.firebaseio.com",
+    "project_id": "wordbook-1b7a3",
+    "storage_bucket": "wordbook-1b7a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260144017633:android:5f8634d8432d94acc2c7a0",
+        "android_client_info": {
+          "package_name": "com.gb.who"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260144017633-qa7f1lc76hvbonrd3j4apl7fasef1ut2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtQSKjDuO5p2xMaB3P-XzJ_OP6rvzxXGk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260144017633-qa7f1lc76hvbonrd3j4apl7fasef1ut2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
